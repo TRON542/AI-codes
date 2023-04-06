@@ -1,0 +1,39 @@
+# Graph in adjacency list representation
+graph = {
+  '5': ['3','7'],
+  '3': ['2', '4'],
+  '7': ['8'],
+  '2': [],
+  '4': ['8'],
+  '8': []
+}
+
+# Depth-First Search algorithm
+def dfs(visited, graph, node):
+    if node not in visited:
+        print(node, end=' ')
+        visited.add(node)
+        for neighbour in graph[node]:
+            dfs(visited, graph, neighbour)
+
+# Breadth-First Search algorithm
+from collections import deque
+
+def bfs(graph, start):
+    visited = set()
+    queue = deque([start])
+    visited.add(start)
+    
+    while queue:
+        node = queue.popleft()
+        print(node, end=' ')
+        for neighbour in graph[node]:
+            if neighbour not in visited:
+                visited.add(neighbour)
+                queue.append(neighbour)
+
+# Driver code
+print("Depth-First Search:")
+dfs(set(), graph, '5')
+print("\nBreadth-First Search:")
+bfs(graph, '5')
